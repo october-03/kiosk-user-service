@@ -1,10 +1,16 @@
-FROM openjdk:21-jdk-slim
-
-RUN mkdir /app
+FROM gradle:8.5.0-jdk21 AS build
 
 WORKDIR /app
 
-COPY build/libs/*.jar /app/app.jar
+COPY . .
+
+RUN gradle bootJar
+
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+COPY --from=build app/build/libs/*.jar /app/app.jar
 
 EXPOSE 8080
 
