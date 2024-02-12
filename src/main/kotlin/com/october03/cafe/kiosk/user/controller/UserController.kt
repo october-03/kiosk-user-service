@@ -1,6 +1,7 @@
 package com.october03.cafe.kiosk.user.controller
 
 import com.october03.cafe.kiosk.user.repository.User
+import com.october03.cafe.kiosk.user.service.LoginResponse
 import com.october03.cafe.kiosk.user.service.UserCreateDto
 import com.october03.cafe.kiosk.user.service.UserLoginDto
 import com.october03.cafe.kiosk.user.service.UserService
@@ -16,7 +17,7 @@ class UserController(private val userService: UserService) {
   }
 
   @PostMapping("/login")
-  fun login(@RequestBody req: UserLoginDto) {
+  fun login(@RequestBody req: UserLoginDto): LoginResponse? {
     return userService.login(req)
   }
 }

@@ -1,0 +1,4 @@
+secret-key: Haveaniceday03!@#CafeManageServiceJwtSecretKey
+access-expiration-hours: 24
+refresh-expiration-hours: 168
+issuer: october03

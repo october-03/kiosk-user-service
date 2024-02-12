@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import lombok.NoArgsConstructor
 import org.springframework.data.jpa.repository.JpaRepository
 import java.time.LocalDateTime
 
@@ -21,8 +20,7 @@ data class User (
   val phoneNumber: String,
   val authToken: String,
   val fcmToken: String,
-  val createdAt: LocalDateTime? = null,
-  val updatedAt: LocalDateTime? = null
+  val createdAt: LocalDateTime = LocalDateTime.now(),
 ) {
   constructor() : this(
     null,
@@ -32,11 +30,11 @@ data class User (
     "",
     "",
     "",
-    null,
-    null
   )
 }
 
 interface UserRepository: JpaRepository<User, Long> {
   fun findByEmail(email: String): User?
+
+  fun findByAuthToken(authToken: String): User?
 }
