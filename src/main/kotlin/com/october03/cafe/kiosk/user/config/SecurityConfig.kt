@@ -25,7 +25,7 @@ class SecurityConfig(
       }
     }
     http.authorizeHttpRequests {
-      it.requestMatchers("/register", "/login").permitAll()
+      it.requestMatchers("/register", "/login", "/auth-token/**").permitAll()
       it.anyRequest().authenticated()
     }
     http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
