@@ -27,10 +27,11 @@ class TokenProvider(
   private val refreshExpirationHours: Long,
 ) {
   private var key = SecretKeySpec(secretKey.toByteArray(), SignatureAlgorithm.HS256.jcaName)
-  private final var now = Date()
-  private val accessExpiration = Date(now.time + accessExpirationHours * 60 * 60 * 1000)
 
   fun createToken(authentication: Authentication): String {
+    val now = Date()
+    val accessExpiration = Date(now.time + accessExpirationHours * 60 * 60 * 1000)
+
     val authorities: String = authentication
       .authorities
       .joinToString(",", transform = GrantedAuthority::getAuthority)
